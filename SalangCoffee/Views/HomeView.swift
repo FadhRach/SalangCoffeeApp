@@ -9,147 +9,133 @@ import SwiftUI
 
 struct HomeView: View {
     @StateObject private var viewModel = CoffeeViewModel()
+    @State private var searchText = ""
     
     var body: some View {
-        NavigationView {
-            ScrollView {
-                VStack(alignment: .leading, spacing: 20) {
-                    // Header Section
-                    headerSection
-                    
-                    // Promotional Banner
-                    promotionalBanner
-                    
-                    // Coffee Categories
-                    categoriesSection
-                    
-                    // Featured Coffee Carousel
-                    featuredCoffeeSection
-                    
-                    // Popular Coffee Grid
-                    popularCoffeeSection
-                }
-                .padding(.horizontal)
+        ScrollView {
+            VStack(spacing: 25) {
+                // Header Section
+                headerSection
+                
+                // Big Image Section
+                bigImageSection
+                
+                // Coffee Carousel
+                carouselSection
+                
+                // Fillable Boxes Grid
+                fillableBoxesSection
+                
+                Spacer(minLength: 50)
             }
-            .navigationBarHidden(true)
-            .background(Color(.systemGray6))
+            .padding()
         }
+        .background(Color(.systemGray6))
     }
     
     // MARK: - Header Section
     private var headerSection: some View {
-        HStack {
-            VStack(alignment: .leading, spacing: 5) {
-                Text("Selamat Datang!")
-                    .font(.subheadline)
+        VStack(spacing: 15) {
+            // Top Header
+            HStack {
+                VStack(alignment: .leading, spacing: 5) {
+                    Text("Hej, Salange Caffeiners")
+                        .font(.subheadline)
+                        .foregroundColor(.gray)
+                    
+                    Text("Salang Coffee")
+                        .font(.title)
+                        .fontWeight(.bold)
+                        .foregroundColor(.brown)
+                }
+                
+                Spacer()
+                
+                // Notification & Profile
+                HStack(spacing: 15) {
+                    Button(action: {}) {
+                        Image(systemName: "bell")
+                            .font(.title3)
+                            .foregroundColor(.brown)
+                    }
+                    
+                    Button(action: {}) {
+                        Image(systemName: "person.circle.fill")
+                            .font(.title2)
+                            .foregroundColor(.brown)
+                    }
+                }
+            }
+            
+            // Search Bar
+            HStack {
+                Image(systemName: "magnifyingglass")
                     .foregroundColor(.gray)
                 
-                Text("Salang Coffee")
-                    .font(.largeTitle)
-                    .fontWeight(.bold)
-                    .foregroundColor(.brown)
+                TextField("Cari kopi favoritmu...", text: $searchText)
+                    .textFieldStyle(PlainTextFieldStyle())
             }
-            
-            Spacer()
-            
-            // Profile Button
-            Button(action: {}) {
-                Image(systemName: "person.circle.fill")
-                    .font(.title2)
-                    .foregroundColor(.brown)
-            }
+            .padding()
+            .background(Color.white)
+            .cornerRadius(12)
+            .shadow(color: .black.opacity(0.1), radius: 2)
         }
-        .padding(.top)
     }
     
-    // MARK: - Promotional Banner
-    private var promotionalBanner: some View {
+    // MARK: - Big Image Section
+    private var bigImageSection: some View {
         ZStack {
-            RoundedRectangle(cornerRadius: 15)
-                .fill(LinearGradient(
-                    gradient: Gradient(colors: [Color.brown, Color.orange]),
-                    startPoint: .leading,
-                    endPoint: .trailing
-                ))
-                .frame(height: 120)
+            // Background Image Placeholder
+            RoundedRectangle(cornerRadius: 20)
+                .fill(
+                    LinearGradient(
+                        gradient: Gradient(colors: [Color.brown.opacity(0.8), Color.orange.opacity(0.6)]),
+                        startPoint: .topLeading,
+                        endPoint: .bottomTrailing
+                    )
+                )
+                .frame(height: 180)
             
             HStack {
-                VStack(alignment: .leading, spacing: 8) {
-                    Text("Promo Hari Ini!")
-                        .font(.headline)
+                VStack(alignment: .leading, spacing: 12) {
+                    Text("Promo Spesial! ☕")
+                        .font(.title2)
                         .fontWeight(.bold)
                         .foregroundColor(.white)
                     
-                    Text("Diskon 20% untuk semua minuman kopi")
+                    Text("Beli 2 Gratis 1\nUntuk semua menu")
                         .font(.subheadline)
                         .foregroundColor(.white.opacity(0.9))
+                        .multilineTextAlignment(.leading)
                     
                     Button("Pesan Sekarang") {
                         // Action
                     }
                     .font(.caption)
-                    .fontWeight(.semibold)
+                    .fontWeight(.bold)
                     .foregroundColor(.brown)
-                    .padding(.horizontal, 16)
-                    .padding(.vertical, 6)
+                    .padding(.horizontal, 20)
+                    .padding(.vertical, 8)
                     .background(Color.white)
                     .cornerRadius(20)
                 }
                 
                 Spacer()
                 
-                Image(systemName: "cup.and.saucer.fill")
-                    .font(.system(size: 50))
-                    .foregroundColor(.white.opacity(0.3))
+                // Coffee Image
+                Text("☕")
+                    .font(.system(size: 80))
+                    .opacity(0.7)
             }
             .padding()
         }
     }
     
-    // MARK: - Categories Section
-    private var categoriesSection: some View {
-        VStack(alignment: .leading, spacing: 15) {
-            Text("Kategori")
-                .font(.title2)
-                .fontWeight(.bold)
-                .foregroundColor(.brown)
-            
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack(spacing: 15) {
-                    CategoryItem(icon: "cup.and.saucer", title: "Espresso", isSelected: true)
-                    CategoryItem(icon: "drop.fill", title: "Cold Brew", isSelected: false)
-                    CategoryItem(icon: "leaf.fill", title: "Frappé", isSelected: false)
-                    CategoryItem(icon: "heart.fill", title: "Signature", isSelected: false)
-                }
-                .padding(.horizontal)
-            }
-        }
-    }
-    
-    // MARK: - Featured Coffee Carousel
-    private var featuredCoffeeSection: some View {
-        VStack(alignment: .leading, spacing: 15) {
-            Text("Kopi Unggulan")
-                .font(.title2)
-                .fontWeight(.bold)
-                .foregroundColor(.brown)
-            
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack(spacing: 15) {
-                    ForEach(viewModel.coffees) { coffee in
-                        CoffeeCarouselCard(coffee: coffee)
-                    }
-                }
-                .padding(.horizontal)
-            }
-        }
-    }
-    
-    // MARK: - Popular Coffee Section
-    private var popularCoffeeSection: some View {
+    // MARK: - Carousel Section
+    private var carouselSection: some View {
         VStack(alignment: .leading, spacing: 15) {
             HStack {
-                Text("Menu Populer")
+                Text("Menu Favorit")
                     .font(.title2)
                     .fontWeight(.bold)
                     .foregroundColor(.brown)
@@ -163,86 +149,121 @@ struct HomeView: View {
                 .foregroundColor(.brown)
             }
             
-            LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 15), count: 2), spacing: 15) {
-                ForEach(viewModel.coffees) { coffee in
-                    CoffeeView(coffee: coffee)
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack(spacing: 15) {
+                    ForEach(viewModel.coffees) { coffee in
+                        CoffeeCarouselCard(coffee: coffee)
+                    }
                 }
+                .padding(.horizontal, 5)
+            }
+        }
+    }
+    
+    // MARK: - Fillable Boxes Section
+    private var fillableBoxesSection: some View {
+        VStack(alignment: .leading, spacing: 15) {
+            Text("Kategori Kopi")
+                .font(.title2)
+                .fontWeight(.bold)
+                .foregroundColor(.brown)
+            
+            LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 15), count: 2), spacing: 15) {
+                FillableBox(title: "Hot Coffee", icon: "🔥", color: .red)
+                FillableBox(title: "Cold Coffee", icon: "🧊", color: .blue)
+                FillableBox(title: "Dessert", icon: "🍰", color: .pink)
+                FillableBox(title: "Snacks", icon: "🍪", color: .orange)
             }
         }
     }
 }
 
-// MARK: - Supporting Views
-struct CategoryItem: View {
-    let icon: String
-    let title: String
-    let isSelected: Bool
-    
-    var body: some View {
-        VStack(spacing: 8) {
-            Image(systemName: icon)
-                .font(.title2)
-                .foregroundColor(isSelected ? .white : .brown)
-                .frame(width: 50, height: 50)
-                .background(isSelected ? Color.brown : Color.white)
-                .cornerRadius(25)
-                .shadow(radius: 2)
-            
-            Text(title)
-                .font(.caption)
-                .fontWeight(.medium)
-                .foregroundColor(isSelected ? .brown : .gray)
-        }
-    }
-}
-
+// MARK: - Coffee Carousel Card
 struct CoffeeCarouselCard: View {
     let coffee: Coffee
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 12) {
+        VStack(spacing: 12) {
             // Coffee Image
-            ZStack {
-                RoundedRectangle(cornerRadius: 15)
-                    .fill(Color.gray.opacity(0.3))
-                    .frame(width: 200, height: 120)
-                
-                Image(systemName: "cup.and.saucer.fill")
-                    .font(.system(size: 40))
-                    .foregroundColor(.brown.opacity(0.6))
-            }
+            RoundedRectangle(cornerRadius: 15)
+                .fill(Color.brown.opacity(0.1))
+                .frame(width: 140, height: 100)
+                .overlay(
+                    Text("☕")
+                        .font(.system(size: 50))
+                )
             
-            VStack(alignment: .leading, spacing: 6) {
+            VStack(spacing: 6) {
                 Text(coffee.name)
                     .font(.headline)
-                    .fontWeight(.semibold)
-                    .foregroundColor(.primary)
+                    .fontWeight(.medium)
+                    .multilineTextAlignment(.center)
                 
                 Text(coffee.price)
                     .font(.subheadline)
-                    .fontWeight(.bold)
                     .foregroundColor(.brown)
+                    .fontWeight(.bold)
                 
-                Button(action: {}) {
-                    HStack {
-                        Image(systemName: "plus")
-                        Text("Tambah")
-                    }
-                    .font(.caption)
-                    .fontWeight(.semibold)
-                    .foregroundColor(.white)
-                    .padding(.horizontal, 16)
-                    .padding(.vertical, 8)
-                    .background(Color.brown)
-                    .cornerRadius(20)
+                Button("+ Pesan") {
+                    // Action
                 }
+                .font(.caption)
+                .fontWeight(.bold)
+                .foregroundColor(.white)
+                .padding(.horizontal, 16)
+                .padding(.vertical, 6)
+                .background(Color.brown)
+                .cornerRadius(15)
             }
-            .padding(.horizontal, 12)
         }
-        .frame(width: 200)
+        .frame(width: 140)
+        .padding()
         .background(Color.white)
         .cornerRadius(20)
-        .shadow(radius: 4)
+        .shadow(color: .black.opacity(0.1), radius: 5)
+    }
+}
+
+// MARK: - Fillable Box
+struct FillableBox: View {
+    let title: String
+    let icon: String
+    let color: Color
+    @State private var isSelected = false
+    
+    var body: some View {
+        Button(action: {
+            isSelected.toggle()
+        }) {
+            VStack(spacing: 12) {
+                Text(icon)
+                    .font(.system(size: 40))
+                
+                Text(title)
+                    .font(.headline)
+                    .fontWeight(.medium)
+                    .foregroundColor(.primary)
+                
+                Text("Tap to select")
+                    .font(.caption)
+                    .foregroundColor(.gray)
+            }
+            .frame(height: 120)
+            .frame(maxWidth: .infinity)
+            .background(
+                isSelected ? color.opacity(0.2) : Color.white
+            )
+            .overlay(
+                RoundedRectangle(cornerRadius: 15)
+                    .stroke(
+                        isSelected ? color : Color.clear,
+                        lineWidth: 2
+                    )
+            )
+            .cornerRadius(15)
+            .shadow(color: .black.opacity(0.1), radius: 3)
+        }
+        .buttonStyle(PlainButtonStyle())
     }
 }
 
