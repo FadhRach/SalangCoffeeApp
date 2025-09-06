@@ -53,6 +53,7 @@ struct ContentView: View {
                 .tag(3)
         }
         .accentColor(.brown)
+        .padding(.bottom, 8)
     }
 }
 
