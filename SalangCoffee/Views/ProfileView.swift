@@ -78,7 +78,7 @@ struct ProfileView: View {
                     .fontWeight(.medium)
                     .foregroundColor(.gray)
                 
-                Button("Edit Profil") {
+                Button("Edit Profile") {
                     isEditingProfile = true
                 }
                 .font(.callout)
@@ -111,7 +111,7 @@ struct ProfileView: View {
     
     private var logoutButton: some View {
         Button(action: {
-            // Logout action
+            // Logout 
         }) {
             HStack(spacing: 12) {
                 Image(systemName: "rectangle.portrait.and.arrow.right")
@@ -150,7 +150,7 @@ struct MenuRow: View {
     
     var body: some View {
         Button(action: {
-            // Handle menu item tap
+            // Handle menu item
         }) {
             HStack(spacing: 18) {
                 Image(systemName: item.icon)
