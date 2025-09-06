@@ -9,19 +9,17 @@ import SwiftUI
 
 struct ContentView: View {
     init() {
-        // Coffee theme TabBar appearance
+   
         let appearance = UITabBarAppearance()
         appearance.configureWithOpaqueBackground()
         appearance.backgroundColor = UIColor.systemBackground
-        
-        // Selected tab color (brown)
+ 
         appearance.stackedLayoutAppearance.selected.iconColor = UIColor.brown
         appearance.stackedLayoutAppearance.selected.titleTextAttributes = [
             .foregroundColor: UIColor.brown,
             .font: UIFont.systemFont(ofSize: 11, weight: .semibold)
         ]
-        
-        // Unselected tab color (gray)
+   
         appearance.stackedLayoutAppearance.normal.iconColor = UIColor.gray
         appearance.stackedLayoutAppearance.normal.titleTextAttributes = [
             .foregroundColor: UIColor.gray,
