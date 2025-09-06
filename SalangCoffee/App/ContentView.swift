@@ -12,19 +12,19 @@ struct ContentView: View {
         // Coffee theme TabBar appearance
         let appearance = UITabBarAppearance()
         appearance.configureWithOpaqueBackground()
-        appearance.backgroundColor = UIColor(red: 0.99, green: 0.97, blue: 0.95, alpha: 1.0) // Coffee cream background
+        appearance.backgroundColor = UIColor.systemBackground
         
-        // Selected tab color (coffee brown)
-        appearance.stackedLayoutAppearance.selected.iconColor = UIColor(red: 0.27, green: 0.18, blue: 0.12, alpha: 1.0)
+        // Selected tab color (brown)
+        appearance.stackedLayoutAppearance.selected.iconColor = UIColor.brown
         appearance.stackedLayoutAppearance.selected.titleTextAttributes = [
-            .foregroundColor: UIColor(red: 0.27, green: 0.18, blue: 0.12, alpha: 1.0),
+            .foregroundColor: UIColor.brown,
             .font: UIFont.systemFont(ofSize: 11, weight: .semibold)
         ]
         
-        // Unselected tab color (medium brown)
-        appearance.stackedLayoutAppearance.normal.iconColor = UIColor(red: 0.51, green: 0.35, blue: 0.24, alpha: 0.6)
+        // Unselected tab color (gray)
+        appearance.stackedLayoutAppearance.normal.iconColor = UIColor.gray
         appearance.stackedLayoutAppearance.normal.titleTextAttributes = [
-            .foregroundColor: UIColor(red: 0.51, green: 0.35, blue: 0.24, alpha: 0.6),
+            .foregroundColor: UIColor.gray,
             .font: UIFont.systemFont(ofSize: 11, weight: .medium)
         ]
         
@@ -52,7 +52,7 @@ struct ContentView: View {
                 }
                 .tag(3)
         }
-        .accentColor(Color(red: 0.27, green: 0.18, blue: 0.12)) // Coffee brown accent
+        .accentColor(.brown)
     }
 }
 

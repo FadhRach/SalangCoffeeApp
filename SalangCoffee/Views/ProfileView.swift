@@ -7,22 +7,8 @@
 
 import SwiftUI
 
-
-struct CoffeeColorPalette {
-    let darkBrown = Color(red: 0.35, green: 0.25, blue: 0.15)      // #59402E
-    let mediumBrown = Color(red: 0.51, green: 0.35, blue: 0.24)    // #82593C
-    let lightBrown = Color(red: 0.67, green: 0.55, blue: 0.45)     // #AB8D72
-    let cream = Color(red: 0.96, green: 0.94, blue: 0.89)          // #F5F0E3
-    let coffee = Color(red: 0.27, green: 0.18, blue: 0.12)         // #452E1E
-    let background = Color(red: 0.98, green: 0.96, blue: 0.93)     // #FAF5ED
-    let cardBackground = Color(red: 0.99, green: 0.97, blue: 0.95) // #FCFAF2
-}
-
 struct ProfileView: View {
     @State private var isEditingProfile = false
-    
-    // Coffee Brown Color Palette
-    private let coffeeColors = CoffeeColorPalette()
     
     private let menuItems = [
         MenuItem(icon: "location", title: "Alamat Tersimpan"),
@@ -56,7 +42,7 @@ struct ProfileView: View {
             }
             .navigationTitle("Profil")
             .navigationBarTitleDisplayMode(.large)
-            .background(coffeeColors.background)
+            .background(Color(.systemGray6))
         }
     }
     
@@ -67,7 +53,7 @@ struct ProfileView: View {
                 Circle()
                     .fill(
                         LinearGradient(
-                            gradient: Gradient(colors: [coffeeColors.mediumBrown, coffeeColors.darkBrown]),
+                            gradient: Gradient(colors: [Color.brown.opacity(0.8), Color.brown]),
                             startPoint: .topLeading,
                             endPoint: .bottomTrailing
                         )
@@ -76,51 +62,51 @@ struct ProfileView: View {
                 
                 Image(systemName: "person.fill")
                     .font(.system(size: 34, weight: .medium))
-                    .foregroundColor(coffeeColors.cream)
+                    .foregroundColor(.white)
             }
-            .shadow(color: coffeeColors.darkBrown.opacity(0.3), radius: 12, x: 0, y: 6)
+            .shadow(color: .brown.opacity(0.3), radius: 12, x: 0, y: 6)
             
             // Profile Info
             VStack(spacing: 8) {
                 Text("Fadhlan Nur R")
                     .font(.title2)
                     .fontWeight(.bold)
-                    .foregroundColor(coffeeColors.coffee)
+                    .foregroundColor(.brown)
                 
                 Text("+62 895 331 580 867")
                     .font(.subheadline)
                     .fontWeight(.medium)
-                    .foregroundColor(coffeeColors.mediumBrown)
+                    .foregroundColor(.gray)
                 
                 Button("Edit Profil") {
                     isEditingProfile = true
                 }
                 .font(.callout)
                 .fontWeight(.semibold)
-                .foregroundColor(coffeeColors.darkBrown)
+                .foregroundColor(.brown)
                 .padding(.horizontal, 20)
                 .padding(.vertical, 8)
-                .background(coffeeColors.lightBrown.opacity(0.3))
+                .background(Color.brown.opacity(0.1))
                 .cornerRadius(20)
                 .padding(.top, 6)
             }
         }
         .padding(.vertical, 25)
         .frame(maxWidth: .infinity)
-        .background(coffeeColors.cardBackground)
+        .background(Color.white)
         .cornerRadius(20)
-        .shadow(color: coffeeColors.darkBrown.opacity(0.1), radius: 15, x: 0, y: 3)
+        .shadow(color: .black.opacity(0.1), radius: 15, x: 0, y: 3)
     }
     
     private var menuSection: some View {
         VStack(spacing: 0) {
             ForEach(Array(menuItems.enumerated()), id: \.element.id) { index, item in
-                MenuRow(item: item, isLast: index == menuItems.count - 1, coffeeColors: coffeeColors)
+                MenuRow(item: item, isLast: index == menuItems.count - 1)
             }
         }
-        .background(coffeeColors.cardBackground)
+        .background(Color.white)
         .cornerRadius(20)
-        .shadow(color: coffeeColors.darkBrown.opacity(0.1), radius: 15, x: 0, y: 3)
+        .shadow(color: .black.opacity(0.1), radius: 15, x: 0, y: 3)
     }
     
     private var logoutButton: some View {
@@ -161,7 +147,6 @@ struct MenuItem: Identifiable {
 struct MenuRow: View {
     let item: MenuItem
     let isLast: Bool
-    let coffeeColors: CoffeeColorPalette
     
     var body: some View {
         Button(action: {
@@ -170,18 +155,18 @@ struct MenuRow: View {
             HStack(spacing: 18) {
                 Image(systemName: item.icon)
                     .font(.system(size: 20, weight: .semibold))
-                    .foregroundColor(coffeeColors.darkBrown)
+                    .foregroundColor(.brown)
                     .frame(width: 28, height: 28)
                 
                 Text(item.title)
                     .font(.body)
                     .fontWeight(.medium)
-                    .foregroundColor(coffeeColors.coffee)
+                    .foregroundColor(.primary)
                     .frame(maxWidth: .infinity, alignment: .leading)
                 
                 Image(systemName: "chevron.right")
                     .font(.system(size: 15, weight: .semibold))
-                    .foregroundColor(coffeeColors.mediumBrown)
+                    .foregroundColor(.gray)
             }
             .padding(.horizontal, 22)
             .padding(.vertical, 18)
@@ -190,7 +175,7 @@ struct MenuRow: View {
         
         if !isLast {
             Divider()
-                .background(coffeeColors.lightBrown.opacity(0.3))
+                .background(Color.gray.opacity(0.3))
                 .padding(.leading, 68)
         }
     }
