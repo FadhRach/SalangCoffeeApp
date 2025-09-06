@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-// Coffee Brown Color Palette
+
 struct CoffeeColorPalette {
     let darkBrown = Color(red: 0.35, green: 0.25, blue: 0.15)      // #59402E
     let mediumBrown = Color(red: 0.51, green: 0.35, blue: 0.24)    // #82593C
