@@ -68,12 +68,12 @@ struct ProfileView: View {
             
             // Profile Info
             VStack(spacing: 8) {
-                Text("Fadhlan Nur R")
+                Text("Sumbul")
                     .font(.title2)
                     .fontWeight(.bold)
                     .foregroundColor(.brown)
                 
-                Text("+62 895 331 580 867")
+                Text("+62 895 321 950 877")
                     .font(.subheadline)
                     .fontWeight(.medium)
                     .foregroundColor(.gray)
