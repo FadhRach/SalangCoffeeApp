@@ -184,3 +184,4 @@ struct MenuRow: View {
 #Preview {
     ProfileView()
 }
+
