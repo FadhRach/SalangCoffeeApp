@@ -44,19 +44,6 @@ SalangCoffeeApp/
 3. Select an iPhone simulator.
 4. Press `Run` or use `Cmd + R`.
 
-## Git Usage
-
-Make sure Git commands are run from the actual project repository:
-
-```powershell
-cd "C:\SEM 4\SalangCoffeeApp\SalangCoffeeApp"
-git status
-git add README.md
-git add SalangCoffee/Views/HomeView.swift SalangCoffee/Views/ProfileView.swift
-git commit -m "Update Salang Coffee app UI"
-git push
-```
-
 ## Notes
 
 This project is intended as a SwiftUI learning project and can be expanded with real product data, authentication, order history, and backend integration.
